@@ -1,0 +1,9 @@
+c:\users\kuba\documents\visual studio 2012\Projects\SCR\SCR\bin\Debug\SCR.exe.config
+c:\users\kuba\documents\visual studio 2012\Projects\SCR\SCR\bin\Debug\SCR.exe
+c:\users\kuba\documents\visual studio 2012\Projects\SCR\SCR\bin\Debug\SCR.pdb
+c:\users\kuba\documents\visual studio 2012\Projects\SCR\SCR\obj\Debug\SCR.csprojResolveAssemblyReference.cache
+c:\users\kuba\documents\visual studio 2012\Projects\SCR\SCR\obj\Debug\SCR.Properties.Resources.resources
+c:\users\kuba\documents\visual studio 2012\Projects\SCR\SCR\obj\Debug\SCR.csproj.GenerateResource.Cache
+c:\users\kuba\documents\visual studio 2012\Projects\SCR\SCR\obj\Debug\SCR.exe
+c:\users\kuba\documents\visual studio 2012\Projects\SCR\SCR\obj\Debug\SCR.pdb
+c:\users\kuba\documents\visual studio 2012\Projects\SCR\SCR\obj\Debug\SCR.Form1.resources

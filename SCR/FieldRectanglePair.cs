@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Windows.Forms;
 
 namespace SCR
 {
@@ -8,7 +7,6 @@ namespace SCR
 		public Field Field { get; set; }
 		public Rectangle Rectangle { get; set; }
 		public Brush Brush { get; set; }
-		public Panel Panel;
 
 		public FieldRectanglePair(int x, int y, int resolution)
 		{

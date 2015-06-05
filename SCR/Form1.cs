@@ -113,15 +113,20 @@ namespace SCR
 		{
 			using (var g = Graphics.FromImage(PitchBitmap))
 			{
-				g.DrawImage(BallImage, Resolution * Ball.Location.X, Resolution * Ball.Location.Y);
-
-				g.FillRectangle(new SolidBrush(Player.Team == Team.Light ? Color.LightSlateGray : Color.Blue),
+				lock (Ball.LocationLock)
+				{
+					g.DrawImage(BallImage, Resolution*Ball.Location.X, Resolution*Ball.Location.Y);
+				}
+				lock (Player.LocationLock)
+				{
+					g.FillRectangle(new SolidBrush(Player.Team == Team.Light ? Color.LightSlateGray : Color.Blue),
 						new Rectangle(
-							Resolution * Player.Location.X,
-							Resolution * Player.Location.Y,
+							Resolution*Player.Location.X,
+							Resolution*Player.Location.Y,
 							Resolution,
 							Resolution
 							));
+				}
 			}
 		}
 

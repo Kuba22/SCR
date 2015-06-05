@@ -4,8 +4,6 @@ namespace SCR
 {
 	public class Pitch
 	{
-		public object RedrawLock = new object();
-
 		public int Length { get; private set; }
 
 		public int Width { get; private set; }

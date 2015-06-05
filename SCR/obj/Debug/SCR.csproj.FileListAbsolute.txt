@@ -7,3 +7,12 @@ c:\users\kuba\documents\visual studio 2012\Projects\SCR\SCR\obj\Debug\SCR.csproj
 c:\users\kuba\documents\visual studio 2012\Projects\SCR\SCR\obj\Debug\SCR.exe
 c:\users\kuba\documents\visual studio 2012\Projects\SCR\SCR\obj\Debug\SCR.pdb
 c:\users\kuba\documents\visual studio 2012\Projects\SCR\SCR\obj\Debug\SCR.Form1.resources
+C:\Users\Kuba\Documents\repository\SCR\SCR\bin\Debug\SCR.exe.config
+C:\Users\Kuba\Documents\repository\SCR\SCR\obj\Debug\SCR.exe
+C:\Users\Kuba\Documents\repository\SCR\SCR\obj\Debug\SCR.pdb
+C:\Users\Kuba\Documents\repository\SCR\SCR\bin\Debug\SCR.exe
+C:\Users\Kuba\Documents\repository\SCR\SCR\bin\Debug\SCR.pdb
+C:\Users\Kuba\Documents\repository\SCR\SCR\obj\Debug\SCR.csprojResolveAssemblyReference.cache
+C:\Users\Kuba\Documents\repository\SCR\SCR\obj\Debug\SCR.Form1.resources
+C:\Users\Kuba\Documents\repository\SCR\SCR\obj\Debug\SCR.Properties.Resources.resources
+C:\Users\Kuba\Documents\repository\SCR\SCR\obj\Debug\SCR.csproj.GenerateResource.Cache

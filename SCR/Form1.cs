@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -19,7 +20,7 @@ namespace SCR
 		public Bitmap PitchBitmap;
 		public Bitmap BallImage;
 
-		public Player Player;
+		public List<Player> Players;
 		public Pitch FootballPitch;
 		public Ball Ball;
 
@@ -54,18 +55,46 @@ namespace SCR
 
 		private void InitializePlayersAndBall()
 		{
-			Player = new Player(Random, FootballPitch) { Location = new Location(5, 5) };
+			Players = new List<Player>();
 
-			Player.FootballPitch.GetField(Player.Location).Field.FieldType = OccupiedBy.PlayerTeamDark;
-			Player.Team = Team.Dark;
+			for (var i = 0; i < TeamSize; i++)
+			{
+				Players.Add(new Player(Random, FootballPitch)
+				{
+					Team = Team.Dark,
+				});
+				Players.Add(new Player(Random, FootballPitch)
+				{
+					Team = Team.Light,
+				});
+			}
 
-			Player.Thread.Start();
+			AssignInitialLocationsToPlayers();
+
+			foreach (var player in Players)
+			{
+				player.FootballPitch.GetField(player.Location).Field.FieldType = player.Team == Team.Light
+					? OccupiedBy.PlayerTeamLight
+					: OccupiedBy.PlayerTeamDark;
+				player.Thread.Start();
+			}
 
 			Ball = new Ball(Random, FootballPitch) { Location = new Location(PitchWidth / 2, PitchLength / 2) };
 			Ball.FootballPitch.GetField(Ball.Location).Field.FieldType = OccupiedBy.Ball;
 			BallImage = Resources.ball30;
 			BallImage.MakeTransparent();
 		}
+
+		private void AssignInitialLocationsToPlayers()
+		{
+			foreach (var player in Players)
+			{
+				player.Location = player.Team == Team.Light
+					? new Location(Random.Next(0, PitchWidth), Random.Next(0, PitchWidth))
+					: new Location(Random.Next(0, PitchWidth), Random.Next(PitchLength / 2, PitchLength));
+			}
+		}
+
 
 		private void DrawPitchInitial()
 		{
@@ -117,15 +146,18 @@ namespace SCR
 				{
 					g.DrawImage(BallImage, Resolution*Ball.Location.X, Resolution*Ball.Location.Y);
 				}
-				lock (Player.LocationLock)
+				foreach (var player in Players)
 				{
-					g.FillRectangle(new SolidBrush(Player.Team == Team.Light ? Color.LightSlateGray : Color.Blue),
-						new Rectangle(
-							Resolution*Player.Location.X,
-							Resolution*Player.Location.Y,
-							Resolution,
-							Resolution
-							));
+					lock (player.LocationLock)
+					{
+						g.FillRectangle(new SolidBrush(player.Team == Team.Light ? Color.LightSlateGray : Color.Blue),
+							new Rectangle(
+								Resolution*player.Location.X,
+								Resolution*player.Location.Y,
+								Resolution,
+								Resolution
+								));
+					}
 				}
 			}
 		}
@@ -145,7 +177,11 @@ namespace SCR
 
 		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			Player.Stop();
+			foreach (var player in Players)
+			{
+				player.Stop();
+			}
+
 			Ball.Stop();
 		}
 

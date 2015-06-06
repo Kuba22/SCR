@@ -12,7 +12,15 @@ namespace SCR
 
 		public void UpdateBallLocation()
 		{
-			
+		}
+
+		protected override bool OccupyLocation()
+		{
+			var field = FootballPitch.GetField(Location);
+			if (field.Field.FieldType != OccupiedBy.None)
+				return false;
+			field.Field.FieldType = Team == Team.Light ? OccupiedBy.PlayerTeamLight : OccupiedBy.PlayerTeamDark;
+			return true;
 		}
 	}
 

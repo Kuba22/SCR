@@ -32,6 +32,7 @@ namespace SCR
 				_direction = (Direction)_random.Next(0, 8);
 				lock (LocationLock)
 				{
+					var previousLocation = (Location) FootballPitch.GetField(Location).Field.Location.Clone();
 					if (_direction == Direction.Up && Location.Y > 0)
 						Location.Y--;
 					else if (_direction == Direction.Down && Location.Y + 1 < FootballPitch.Length)
@@ -68,10 +69,25 @@ namespace SCR
 						Location.X++;
 						Location.Y++;
 					}
+
+					if (OccupyLocation())
+						FreeLocation(previousLocation);
+					else
+						Location = previousLocation;
 				}
 
 				Thread.Sleep(Speed * 500);
 			}
+		}
+
+		protected virtual void FreeLocation(Location location)
+		{
+			FootballPitch.GetField(location).Field.FieldType = OccupiedBy.None;
+		}
+
+		protected virtual bool OccupyLocation()
+		{
+			throw new NotImplementedException();
 		}
 
 		public void Stop()

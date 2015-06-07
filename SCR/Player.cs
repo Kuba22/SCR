@@ -25,6 +25,12 @@ namespace SCR
 		{
 			while (KeepMoving)
 			{
+				lock (Ball.BallLock)
+				{
+					if (NeighborsBall())
+						Ball.SetOwner(this);
+				}
+
 				_direction = (Direction)_random.Next(0, 8);
 				lock (LocationLock)
 				{
@@ -74,6 +80,19 @@ namespace SCR
 
 				Thread.Sleep(Speed * 500);
 			}
+		}
+
+		private bool NeighborsBall()
+		{
+			var result = Ball.Location.Neighbors(Location);
+			if (result)
+				Ball.PlayerWithBall = this;
+			return result;
+		}
+
+		private bool HasBall()
+		{
+			return Ball.IsControlledBy(this);
 		}
 
 		protected override bool OccupyLocation()

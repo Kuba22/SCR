@@ -43,5 +43,13 @@ namespace SCR
 		{
 			return new Location(X, Y);
 		}
+
+		public bool Neighbors(Location location)
+		{
+			if (Math.Sqrt((location.X - X)*(location.X - X) + (location.Y - Y)*(location.Y - Y)) < 1.5)
+				return true;
+
+			return false;
+		}
 	}
 }

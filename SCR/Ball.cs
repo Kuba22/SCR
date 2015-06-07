@@ -4,7 +4,7 @@ namespace SCR
 {
 	public class Ball: BaseMovingOnPitch
 	{
-		public Ball(Random random, Pitch pitch): base(random, pitch)
+		public Ball(Random random, Pitch pitch): base(pitch)
 		{
 		}
 	}

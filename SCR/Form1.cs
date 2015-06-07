@@ -55,15 +55,20 @@ namespace SCR
 
 		private void InitializePlayersAndBall()
 		{
+			Ball = new Ball(Random, FootballPitch) { Location = new Location(PitchWidth / 2, PitchLength / 2) };
+			Ball.FootballPitch.GetField(Ball.Location).Field.FieldType = OccupiedBy.Ball;
+			BallImage = Resources.ball30;
+			BallImage.MakeTransparent();
+
 			Players = new List<Player>();
 
 			for (var i = 0; i < TeamSize; i++)
 			{
-				Players.Add(new Player(Random, FootballPitch)
+				Players.Add(new Player(Random, FootballPitch, Ball)
 				{
 					Team = Team.Dark,
 				});
-				Players.Add(new Player(Random, FootballPitch)
+				Players.Add(new Player(Random, FootballPitch, Ball)
 				{
 					Team = Team.Light,
 				});
@@ -78,11 +83,6 @@ namespace SCR
 					: OccupiedBy.PlayerTeamDark;
 				player.Thread.Start();
 			}
-
-			Ball = new Ball(Random, FootballPitch) { Location = new Location(PitchWidth / 2, PitchLength / 2) };
-			Ball.FootballPitch.GetField(Ball.Location).Field.FieldType = OccupiedBy.Ball;
-			BallImage = Resources.ball30;
-			BallImage.MakeTransparent();
 		}
 
 		private void AssignInitialLocationsToPlayers()
@@ -181,8 +181,6 @@ namespace SCR
 			{
 				player.Stop();
 			}
-
-			Ball.Stop();
 		}
 
 		private void timer_Tick(object sender, EventArgs e)

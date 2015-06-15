@@ -29,48 +29,21 @@ namespace SCR
 				{
 					if (NeighborsBall())
 						Ball.SetOwner(this);
+					if (HasBall())
+					{
+						_direction = Team == Team.Light ? Direction.Down : Direction.Up;
+						var previousBallLoc = (Location) Ball.Location.Clone();
+						Ball.MoveBall(new Location(Location.X, Team == Team.Light ? Location.Y + 1 : Location.Y - 1), previousBallLoc);
+					}
+					else
+						_direction = (Direction)_random.Next(0, 8);
 				}
 
-				_direction = (Direction)_random.Next(0, 8);
 				lock (LocationLock)
 				{
 					var previousLocation = (Location)FootballPitch.GetField(Location).Field.Location.Clone();
-					if (_direction == Direction.Up && Location.Y > 0)
-						Location.Y--;
-					else if (_direction == Direction.Down && Location.Y + 1 < FootballPitch.Length)
-						Location.Y++;
-					else if (_direction == Direction.Left && Location.X > 0)
-						Location.X--;
-					else if (_direction == Direction.Right && Location.X + 1 < FootballPitch.Width)
-						Location.X++;
-					else if (_direction == Direction.UpLeft &&
-							Location.X - 1 > 0 &&
-							Location.Y - 1 > 0)
-					{
-						Location.X--;
-						Location.Y--;
-					}
-					else if (_direction == Direction.UpRight &&
-							Location.X + 1 < FootballPitch.Width &&
-							Location.Y - 1 > 0)
-					{
-						Location.X++;
-						Location.Y--;
-					}
-					else if (_direction == Direction.DownLeft &&
-							Location.X - 1 > 0 &&
-							Location.Y + 1 < FootballPitch.Length)
-					{
-						Location.X--;
-						Location.Y++;
-					}
-					else if (_direction == Direction.DownRight &&
-							Location.X + 1 < FootballPitch.Width &&
-							Location.Y + 1 < FootballPitch.Length)
-					{
-						Location.X++;
-						Location.Y++;
-					}
+
+					MoveInDirection(_direction);
 
 					if (OccupyLocation())
 						FreeLocation(previousLocation);

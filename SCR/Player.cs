@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace SCR
 {
@@ -27,13 +28,19 @@ namespace SCR
 			{
 				lock (Ball.BallLock)
 				{
-					if (NeighborsBall())
+					if (NeighborsBall() && !HasBall())
 						Ball.SetOwner(this);
 					if (HasBall())
 					{
 						_direction = Team == Team.Light ? Direction.Down : Direction.Up;
 						var previousBallLoc = (Location) Ball.Location.Clone();
 						Ball.MoveBall(new Location(Location.X, Team == Team.Light ? Location.Y + 1 : Location.Y - 1), previousBallLoc);
+						Console.WriteLine(@"Ball: " + Ball.Location);
+						if (Ball.InGoal())
+						{
+							MessageBox.Show(@"Team {0} scored", Team.ToString());
+							Ball.MoveBall(new Location(FootballPitch.Width/2, FootballPitch.Length/2), previousBallLoc);
+						}
 					}
 					else
 						_direction = (Direction)_random.Next(0, 8);

@@ -30,9 +30,12 @@ namespace SCR
 				return;
 			Location = to;
 			if(OccupyLocation())
-			{
 				FreeLocation(Location);
-			}
+		}
+
+		public bool InGoal()
+		{
+			return Location.Y == FootballPitch.Length - 1 || Location.Y == 0;
 		}
 
 		protected override bool OccupyLocation()

@@ -34,7 +34,7 @@ namespace SCR
 					{
 						_direction = Team == Team.Light ? Direction.Down : Direction.Up;
 						var previousBallLoc = (Location) Ball.Location.Clone();
-						Ball.MoveBall(new Location(Location.X, Team == Team.Light ? Location.Y + 1 : Location.Y - 1), previousBallLoc);
+						Ball.MoveBall(new Location(Location.X, Team == Team.Light ? Location.Y + 2 : Location.Y - 2), previousBallLoc);
 						Console.WriteLine(@"Ball: " + Ball.Location);
 						if (Ball.InGoal())
 						{

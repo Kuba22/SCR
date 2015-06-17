@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace SCR
 {
@@ -12,6 +13,8 @@ namespace SCR
 		protected bool KeepMoving = true;
 
 		public Location Location { get; set; }
+
+		public Bitmap Image;
 
 		protected BaseMovingOnPitch(Pitch pitch)
 		{

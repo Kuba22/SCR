@@ -38,7 +38,7 @@ namespace SCR
 						Console.WriteLine(@"Ball: " + Ball.Location);
 						if (Ball.InGoal())
 						{
-							MessageBox.Show(@"Team {0} scored", Team.ToString());
+							MessageBox.Show(string.Format("Team {0} scored", Enum.GetName(typeof (Team), Team)));
 							Ball.MoveBall(new Location(FootballPitch.Width/2, FootballPitch.Length/2), previousBallLoc);
 						}
 					}

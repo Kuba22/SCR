@@ -99,6 +99,36 @@
   <ItemGroup>
     <None Include="bin\Debug\ball194.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\kitDark1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\kitDark2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\kitDark3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\kitDark4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\kitDark5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\kitLight1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\kitLight2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\kitLight3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\kitLight4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\kitLight5.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -124,4 +124,34 @@
   <data name="ball30" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\ball30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="kitDark1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\kitDark1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kitDark2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\kitDark2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kitDark3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\kitDark3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kitDark4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\kitDark4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kitDark5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\kitDark5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kitLight1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\kitLight1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kitLight2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\kitLight2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kitLight3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\kitLight3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kitLight4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\kitLight4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kitLight5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\kitLight5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

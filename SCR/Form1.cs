@@ -57,20 +57,29 @@ namespace SCR
 		{
 			Ball = new Ball(Random, FootballPitch) { Location = new Location(PitchWidth / 2, PitchLength / 2) };
 			Ball.FootballPitch.GetField(Ball.Location).Field.FieldType = OccupiedBy.Ball;
-			BallImage = Resources.ball30;
-			BallImage.MakeTransparent();
+			Ball.Image = Resources.ball30;
+			Ball.Image.MakeTransparent();
 
 			Players = new List<Player>();
 
 			for (var i = 0; i < TeamSize; i++)
 			{
+				var kit = (Bitmap)Resources.ResourceManager.GetObject(string.Format("kitDark{0}", i + 1));
+				var smallKit = new Bitmap(kit, new Size(Resolution, Resolution));
+				smallKit.MakeTransparent(Color.FromArgb(255, 255, 0, 255));
 				Players.Add(new Player(Random, FootballPitch, Ball)
 				{
 					Team = Team.Dark,
+					Image = smallKit,
 				});
+
+				kit = (Bitmap)Resources.ResourceManager.GetObject(string.Format("kitLight{0}", i + 1));
+				smallKit = new Bitmap(kit, new Size(Resolution, Resolution));
+				smallKit.MakeTransparent(Color.FromArgb(255, 255, 0, 255));
 				Players.Add(new Player(Random, FootballPitch, Ball)
 				{
 					Team = Team.Light,
+					Image = smallKit,
 				});
 			}
 
@@ -144,19 +153,21 @@ namespace SCR
 			{
 				lock (Ball.LocationLock)
 				{
-					g.DrawImage(BallImage, Resolution*Ball.Location.X, Resolution*Ball.Location.Y);
+					g.DrawImage(Ball.Image, Resolution*Ball.Location.X, Resolution*Ball.Location.Y);
 				}
 				foreach (var player in Players)
 				{
 					lock (player.LocationLock)
 					{
-						g.FillRectangle(new SolidBrush(player.Team == Team.Light ? Color.LightSlateGray : Color.Blue),
-							new Rectangle(
-								Resolution*player.Location.X,
-								Resolution*player.Location.Y,
-								Resolution,
-								Resolution
-								));
+						g.DrawImage(player.Image, Resolution*player.Location.X, Resolution*player.Location.Y);
+
+						//g.FillRectangle(new SolidBrush(player.Team == Team.Light ? Color.LightSlateGray : Color.Blue),
+						//	new Rectangle(
+						//		Resolution*player.Location.X,
+						//		Resolution*player.Location.Y,
+						//		Resolution,
+						//		Resolution
+						//		));
 					}
 				}
 			}

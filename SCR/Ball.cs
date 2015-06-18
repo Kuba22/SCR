@@ -30,7 +30,7 @@ namespace SCR
 				return;
 			Location = to;
 			if(OccupyLocation())
-				FreeLocation(Location);
+				FreeLocation(from);
 		}
 
 		public bool InGoal()

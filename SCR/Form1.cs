@@ -65,6 +65,7 @@ namespace SCR
 			for (var i = 0; i < TeamSize; i++)
 			{
 				var kit = (Bitmap)Resources.ResourceManager.GetObject(string.Format("kitDark{0}", i + 1));
+				if (kit == null) continue;
 				var smallKit = new Bitmap(kit, new Size(Resolution, Resolution));
 				smallKit.MakeTransparent(Color.FromArgb(255, 255, 0, 255));
 				Players.Add(new Player(Random, FootballPitch, Ball)
@@ -74,7 +75,7 @@ namespace SCR
 				});
 
 				kit = (Bitmap)Resources.ResourceManager.GetObject(string.Format("kitLight{0}", i + 1));
-				smallKit = new Bitmap(kit, new Size(Resolution, Resolution));
+				if (kit != null) smallKit = new Bitmap(kit, new Size(Resolution, Resolution));
 				smallKit.MakeTransparent(Color.FromArgb(255, 255, 0, 255));
 				Players.Add(new Player(Random, FootballPitch, Ball)
 				{

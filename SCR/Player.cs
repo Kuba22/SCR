@@ -52,10 +52,13 @@ namespace SCR
 
 					MoveInDirection(_direction);
 
-					if (OccupyLocation())
-						FreeLocation(previousLocation);
-					else
-						Location = previousLocation;
+					lock (FootballPitch.PitchLock)
+					{
+						if (OccupyLocation())
+							FreeLocation(previousLocation);
+						else
+							Location = previousLocation;
+					}
 				}
 
 				Thread.Sleep(Speed * 500);

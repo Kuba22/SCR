@@ -161,14 +161,6 @@ namespace SCR
 					lock (player.LocationLock)
 					{
 						g.DrawImage(player.Image, Resolution*player.Location.X, Resolution*player.Location.Y);
-
-						//g.FillRectangle(new SolidBrush(player.Team == Team.Light ? Color.LightSlateGray : Color.Blue),
-						//	new Rectangle(
-						//		Resolution*player.Location.X,
-						//		Resolution*player.Location.Y,
-						//		Resolution,
-						//		Resolution
-						//		));
 					}
 				}
 			}

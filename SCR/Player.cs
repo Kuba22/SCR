@@ -36,29 +36,21 @@ namespace SCR
 						var previousBallLoc = (Location) Ball.Location.Clone();
 						Ball.MoveBall(new Location(Location.X, Team == Team.Light ? Location.Y + 2 : Location.Y - 2), previousBallLoc);
 						Console.WriteLine(@"Ball: " + Ball.Location);
-						if (Ball.InGoal())
-						{
-							MessageBox.Show(string.Format("Team {0} scored", Enum.GetName(typeof (Team), Team)));
-							Ball.MoveBall(new Location(FootballPitch.Width/2, FootballPitch.Length/2), previousBallLoc);
-						}
 					}
 					else
 						_direction = (Direction)_random.Next(0, 8);
 				}
 
-				lock (LocationLock)
+				lock (FootballPitch.PitchLock)
 				{
 					var previousLocation = (Location)FootballPitch.GetField(Location).Field.Location.Clone();
 
 					MoveInDirection(_direction);
 
-					lock (FootballPitch.PitchLock)
-					{
-						if (OccupyLocation())
-							FreeLocation(previousLocation);
-						else
-							Location = previousLocation;
-					}
+					if (OccupyLocation())
+						FreeLocation(previousLocation);
+					else
+						Location = previousLocation;
 				}
 
 				Thread.Sleep(Speed * 500);

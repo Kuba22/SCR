@@ -144,6 +144,20 @@ namespace SCR
 			using (var g = Graphics.FromImage(PitchBitmap))
 			{
 				DrawBallAndPlayers();
+				int p = 0;
+				int b = 0;
+				for (var i = 0; i < FootballPitch.Width; i++)
+				{
+					for (var j = 0; j < FootballPitch.Length; j++)
+					{
+						var f = FootballPitch.FieldRectanglePairs[i, j].Field;
+						if (f.FieldType == OccupiedBy.PlayerTeamDark || f.FieldType == OccupiedBy.PlayerTeamLight)
+							p++;
+						if (f.FieldType == OccupiedBy.Ball)
+							b++;
+					}
+				}
+				Console.WriteLine("Balls: {0}, Players: {1}", b, p);
 				DrawLines(g);
 			}
 		}

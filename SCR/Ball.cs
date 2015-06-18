@@ -27,8 +27,12 @@ namespace SCR
 		public void MoveBall(Location to, Location from)
 		{
 			if (to.X + 1 > FootballPitch.Width || to.X < 0 || to.Y + 1 > FootballPitch.Length || to.Y < 0)
-				return;
-			Location = to;
+			{
+				Location = new Location(FootballPitch.Width/2, FootballPitch.Length/2);
+				SetOwner(null);
+			}
+			else
+				Location = to;
 			if(OccupyLocation())
 				FreeLocation(from);
 		}

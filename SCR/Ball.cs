@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace SCR
 {
@@ -6,9 +7,7 @@ namespace SCR
 	{
 		public Player PlayerWithBall = null;
 
-		public object BallLock = new object();
-
-		public Ball(Random random, Pitch pitch): base(pitch)
+		public Ball(Pitch pitch): base(pitch)
 		{
 		}
 
@@ -33,8 +32,10 @@ namespace SCR
 			}
 			else
 				Location = to;
-			if(OccupyLocation())
+			if (OccupyLocation())
 				FreeLocation(from);
+			else
+				Location = from;
 		}
 
 		public bool InGoal()

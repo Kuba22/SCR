@@ -5,11 +5,9 @@ namespace SCR
 {
 	public abstract class BaseMovingOnPitch: IMovable
 	{
-		public object LocationLock = new object();
-
 		public Pitch FootballPitch;
 		protected const int Speed = 1;
-		protected Direction _direction;
+		protected Direction Direction;
 		protected bool KeepMoving = true;
 
 		public Location Location { get; set; }

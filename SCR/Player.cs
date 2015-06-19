@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using System.Windows.Forms;
 
 namespace SCR
 {
@@ -18,7 +17,7 @@ namespace SCR
 		{
 			_random = random;
 			Ball = ball;
-			_direction = (Direction)_random.Next(0, 8);
+			Direction = (Direction)_random.Next(0, 8);
 			Thread = new Thread(Move);
 		}
 
@@ -26,26 +25,26 @@ namespace SCR
 		{
 			while (KeepMoving)
 			{
-				lock (Ball.BallLock)
+				lock (FootballPitch.PitchLock)
 				{
 					if (NeighborsBall() && !HasBall())
 						Ball.SetOwner(this);
 					if (HasBall())
 					{
-						_direction = Team == Team.Light ? Direction.Down : Direction.Up;
-						var previousBallLoc = (Location) Ball.Location.Clone();
-						Ball.MoveBall(new Location(Location.X, Team == Team.Light ? Location.Y + 2 : Location.Y - 2), previousBallLoc);
+						var previousBallLocation = (Location) Ball.Location.Clone();
+						var nextBallLocation = new Location(Location.X, Team == Team.Light ? Location.Y + 2 : Location.Y - 2);
+
+						Ball.MoveBall(nextBallLocation, previousBallLocation);
 						Console.WriteLine(@"Ball: " + Ball.Location);
+
+						Direction = Team == Team.Light ? Direction.Down : Direction.Up;
 					}
 					else
-						_direction = (Direction)_random.Next(0, 8);
-				}
+						Direction = (Direction) _random.Next(0, 8);
 
-				lock (FootballPitch.PitchLock)
-				{
-					var previousLocation = (Location)FootballPitch.GetField(Location).Field.Location.Clone();
+					var previousLocation = (Location) FootballPitch.GetField(Location).Field.Location.Clone();
 
-					MoveInDirection(_direction);
+					MoveInDirection(Direction);
 
 					if (OccupyLocation())
 						FreeLocation(previousLocation);

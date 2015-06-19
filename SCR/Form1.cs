@@ -55,7 +55,7 @@ namespace SCR
 
 		private void InitializePlayersAndBall()
 		{
-			Ball = new Ball(Random, FootballPitch) { Location = new Location(PitchWidth / 2, PitchLength / 2) };
+			Ball = new Ball(FootballPitch) {Location = new Location(PitchWidth/2, PitchLength/2)};
 			Ball.FootballPitch.GetField(Ball.Location).Field.FieldType = OccupiedBy.Ball;
 			Ball.Image = Resources.ball30;
 			Ball.Image.MakeTransparent();
@@ -64,23 +64,16 @@ namespace SCR
 
 			for (var i = 0; i < TeamSize; i++)
 			{
-				var kit = (Bitmap)Resources.ResourceManager.GetObject(string.Format("kitDark{0}", i + 1));
-				if (kit == null) continue;
-				var smallKit = new Bitmap(kit, new Size(Resolution, Resolution));
-				smallKit.MakeTransparent(Color.FromArgb(255, 255, 0, 255));
 				Players.Add(new Player(Random, FootballPitch, Ball)
 				{
 					Team = Team.Dark,
-					Image = smallKit,
+					Image = GetKitImage(i, Team.Dark),
 				});
 
-				kit = (Bitmap)Resources.ResourceManager.GetObject(string.Format("kitLight{0}", i + 1));
-				if (kit != null) smallKit = new Bitmap(kit, new Size(Resolution, Resolution));
-				smallKit.MakeTransparent(Color.FromArgb(255, 255, 0, 255));
 				Players.Add(new Player(Random, FootballPitch, Ball)
 				{
 					Team = Team.Light,
-					Image = smallKit,
+					Image = GetKitImage(i, Team.Light),
 				});
 			}
 
@@ -93,6 +86,15 @@ namespace SCR
 					: OccupiedBy.PlayerTeamDark;
 				player.Thread.Start();
 			}
+		}
+
+		private Bitmap GetKitImage(int i, Team team)
+		{
+			var kit = (Bitmap) Resources.ResourceManager.GetObject(
+				team == Team.Dark ? string.Format("kitDark{0}", i + 1) : string.Format("kitLight{0}", i + 1));
+			var smallKit = new Bitmap(kit, new Size(Resolution, Resolution));
+			smallKit.MakeTransparent(Color.FromArgb(255, 255, 0, 255));
+			return smallKit;
 		}
 
 		private void AssignInitialLocationsToPlayers()
@@ -144,20 +146,6 @@ namespace SCR
 			using (var g = Graphics.FromImage(PitchBitmap))
 			{
 				DrawBallAndPlayers();
-				int p = 0;
-				int b = 0;
-				for (var i = 0; i < FootballPitch.Width; i++)
-				{
-					for (var j = 0; j < FootballPitch.Length; j++)
-					{
-						var f = FootballPitch.FieldRectanglePairs[i, j].Field;
-						if (f.FieldType == OccupiedBy.PlayerTeamDark || f.FieldType == OccupiedBy.PlayerTeamLight)
-							p++;
-						if (f.FieldType == OccupiedBy.Ball)
-							b++;
-					}
-				}
-				Console.WriteLine("Balls: {0}, Players: {1}", b, p);
 				DrawLines(g);
 			}
 		}
@@ -166,13 +154,13 @@ namespace SCR
 		{
 			using (var g = Graphics.FromImage(PitchBitmap))
 			{
-				lock (Ball.LocationLock)
+				lock (FootballPitch.PitchLock)
 				{
-					g.DrawImage(Ball.Image, Resolution*Ball.Location.X, Resolution*Ball.Location.Y);
+					g.DrawImage(Ball.Image, Resolution * Ball.Location.X, Resolution * Ball.Location.Y);
 				}
 				foreach (var player in Players)
 				{
-					lock (player.LocationLock)
+					lock (FootballPitch.PitchLock)
 					{
 						g.DrawImage(player.Image, Resolution*player.Location.X, Resolution*player.Location.Y);
 					}
